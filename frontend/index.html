@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRestrict | Indian Packaged Food Nutrition & Restriction Intelligence</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top py-2">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <i class="bi bi-shield-check text-success fs-3"></i>
+        <span>Smart<span class="text-success">Restrict</span></span>
+        <span class="badge bg-success-subtle text-success border border-success-subtle ms-1">Oracle 26ai</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item"><a class="nav-link active fw-semibold" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="/catalogue">Product Catalogue</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="/evaluate">Dietary Checker</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="/profile">My Health Profile</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-3">
+          <span id="db-health-badge" class="badge bg-light text-muted border">Connecting to Oracle...</span>
+          <div id="nav-user-badge"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container text-center py-4">
+      <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill fw-semibold mb-3">
+        <i class="bi bi-stars me-1"></i> Data-Driven Food Intelligence Platform
+      </span>
+      <h1 class="hero-title mb-3">Know What's Inside Indian Packaged Foods</h1>
+      <p class="hero-subtitle mx-auto mb-4">
+        SmartRestrict analyzes nutrition facts, ingredients, allergens, and dietary restrictions 
+        using live Oracle Database classification rules — helping you make healthier choices and find better alternatives.
+      </p>
+
+      <!-- Prominent Search Box -->
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-9 col-lg-7">
+          <div class="search-card p-2 d-flex align-items-center">
+            <i class="bi bi-search text-muted fs-5 ms-3"></i>
+            <input type="text" id="hero-search-input" class="form-control search-input" 
+                   placeholder="Search 850+ packaged foods (e.g., Hide & Seek, Dark Fantasy, Oats, Kurkure)..."
+                   aria-label="Search packaged foods">
+            <button id="hero-search-btn" class="btn btn-success px-4 py-2 rounded-3 fw-semibold">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Category Shortcuts -->
+      <div class="d-flex flex-wrap justify-content-center gap-2 pt-2">
+        <span class="text-muted small align-self-center me-2">Quick categories:</span>
+        <a href="/catalogue?q=biscuit" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Biscuits & Cookies</a>
+        <a href="/catalogue?q=chips" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Chips & Namkeen</a>
+        <a href="/catalogue?q=noodles" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Instant Noodles</a>
+        <a href="/catalogue?q=oats" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Breakfast Cereals</a>
+        <a href="/catalogue?q=chocolate" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Chocolates</a>
+        <a href="/catalogue?q=beverage" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Beverages</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Real Database Statistics Bar -->
+  <section class="bg-white border-bottom py-3">
+    <div class="container">
+      <div class="row g-3 text-center align-items-center">
+        <div class="col-6 col-md-3">
+          <div class="stat-pill w-100 justify-content-center">
+            <i class="bi bi-box-seam text-success fs-5"></i>
+            <span>852 Products</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-pill w-100 justify-content-center">
+            <i class="bi bi-tag text-primary fs-5"></i>
+            <span>262 Verified Brands</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-pill w-100 justify-content-center">
+            <i class="bi bi-shield-exclamation text-danger fs-5"></i>
+            <span>8 Tracked Allergens</span>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-pill w-100 justify-content-center">
+            <i class="bi bi-heart-pulse text-warning fs-5"></i>
+            <span>5 Health Restrictions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <main class="container my-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">How SmartRestrict Evaluates Food</h2>
+      <p class="text-muted">Database-driven, rule-based classification — transparent, explainable, and scientific.</p>
+    </div>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-3">
+        <div class="card h-100 p-3 border-0 shadow-sm text-center">
+          <div class="rounded-circle bg-success-subtle text-success d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 56px; height: 56px;">
+            <i class="bi bi-database fs-4"></i>
+          </div>
+          <h5 class="fw-bold">1. Verified Label Data</h5>
+          <p class="text-muted small">
+            Stored nutritional facts per 100g/serving, complete ingredients text, allergens, and dietary classifications from Indian market labels.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 p-3 border-0 shadow-sm text-center">
+          <div class="rounded-circle bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 56px; height: 56px;">
+            <i class="bi bi-sliders fs-4"></i>
+          </div>
+          <h5 class="fw-bold">2. Dynamic Tag Rules</h5>
+          <p class="text-muted small">
+            Configurable statistical thresholds automatically assign concern tags (High Sugar, High Sodium) and positive tags (High Fibre, Low Fat).
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 p-3 border-0 shadow-sm text-center">
+          <div class="rounded-circle bg-danger-subtle text-danger d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 56px; height: 56px;">
+            <i class="bi bi-shield-x fs-4"></i>
+          </div>
+          <h5 class="fw-bold">3. Restriction Guard</h5>
+          <p class="text-muted small">
+            Profiles like Diabetes, High Cholesterol, Low Sodium, and Gluten Intolerance flag conflicting tags and declared allergens with clear reasons.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 p-3 border-0 shadow-sm text-center">
+          <div class="rounded-circle bg-warning-subtle text-warning-emphasis d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 56px; height: 56px;">
+            <i class="bi bi-arrow-repeat fs-4"></i>
+          </div>
+          <h5 class="fw-bold">4. Better Alternatives</h5>
+          <p class="text-muted small">
+            Explainable recommendation engine calculates healthier substitutes in the same category, detailing lower sugar, lower sodium, or higher fibre.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Products Spotlight -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h3 class="fw-bold mb-0">Featured Packaged Foods</h3>
+        <p class="text-muted small mb-0">Explore real products analyzed with live database nutrition facts and tags</p>
+      </div>
+      <a href="/catalogue" class="btn btn-outline-success fw-semibold">View All 850+ Products <i class="bi bi-arrow-right"></i></a>
+    </div>
+
+    <div id="featured-products-grid" class="row g-4">
+      <!-- Dynamically loaded -->
+      <div class="col-12 text-center py-5">
+        <div class="spinner-border text-success" role="status"></div>
+        <p class="text-muted mt-2">Loading products from Oracle...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-light border-top py-4 mt-auto">
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-md-6 text-center text-md-start">
+          <span class="fw-bold text-success">SmartRestrict</span> — Indian Packaged Food Intelligence Platform
+          <p class="text-muted small mb-0 mt-1">
+            Built with Oracle Database Free 26ai, Python FastAPI, and Bootstrap 5.
+          </p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="alert alert-warning py-1 px-3 d-inline-block small mb-0 text-start">
+            <i class="bi bi-info-circle me-1"></i>
+            <strong>Medical Disclaimer:</strong> For informational purposes based on packaged food labels. Not medical advice. Always inspect physical packaging before consuming if you have severe allergies.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/api.js"></script>
+  <script src="/static/js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Hero search button
+      const searchInput = document.getElementById("hero-search-input");
+      const searchBtn = document.getElementById("hero-search-btn");
+      
+      const doSearch = () => {
+        const val = searchInput.value.trim();
+        window.location.href = `/catalogue?q=${encodeURIComponent(val)}`;
+      };
+
+      searchBtn.addEventListener("click", doSearch);
+      searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") doSearch();
+      });
+
+      // Load 6 featured products
+      try {
+        const res = await API.getProducts({ page: 1, page_size: 6 });
+        const grid = document.getElementById("featured-products-grid");
+        if (!res.items || res.items.length === 0) {
+          grid.innerHTML = '<div class="col-12 text-center text-muted">No products found.</div>';
+          return;
+        }
+
+        grid.innerHTML = res.items.map(p => `
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <span class="brand-badge">${App.escapeHtml(p.brand_name || "Packaged Food")}</span>
+                  <div>
+                    ${App.renderDietaryBadge(p.dietary_types)}
+                    <span class="badge bg-light text-dark border">${App.escapeHtml(p.category_name || "Food")}</span>
+                  </div>
+                </div>
+
+                <h5 class="product-title mb-2">
+                  <a href="/product-detail?id=${p.product_id}" class="text-decoration-none text-dark">
+                    ${App.escapeHtml(p.item_name)}
+                  </a>
+                </h5>
+
+                <div class="mb-3 d-flex flex-wrap">
+                  ${p.tags.slice(0, 3).map(t => App.renderTagBadge(t)).join("")}
+                </div>
+
+                <div class="row g-2 mb-3 mt-auto">
+                  <div class="col-4">
+                    <div class="nutrient-chip">
+                      <span class="label">Calories</span>
+                      <span>${p.calories !== null ? p.calories + ' kcal' : 'N/A'}</span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="nutrient-chip">
+                      <span class="label">Sugar</span>
+                      <span>${p.sugar !== null ? p.sugar + 'g' : 'N/A'}</span>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="nutrient-chip">
+                      <span class="label">Sodium</span>
+                      <span>${p.sodium !== null ? p.sodium + 'mg' : 'N/A'}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
+                  <span class="fw-bold text-success">${p.price_inr ? '₹' + p.price_inr : 'Label Price'}</span>
+                  <a href="/product-detail?id=${p.product_id}" class="btn btn-outline-success btn-sm">
+                    Inspect Details <i class="bi bi-chevron-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join("");
+      } catch (err) {
+        document.getElementById("featured-products-grid").innerHTML = `
+          <div class="col-12 text-center text-muted py-4">
+            <i class="bi bi-exclamation-circle text-warning fs-3 mb-2"></i>
+            <p>Database loading. Browse products via <a href="/catalogue">Catalogue</a>.</p>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,1620 @@
+{
+  "ALLERGENS": {
+    "row_count": 8,
+    "columns": [
+      {
+        "name": "ALLERGEN_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "ALLERGEN_NAME",
+        "type": "VARCHAR2",
+        "length": 50,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008602",
+        "type": "C",
+        "r_name": null,
+        "column": "ALLERGEN_ID"
+      },
+      {
+        "name": "SYS_C008603",
+        "type": "C",
+        "r_name": null,
+        "column": "ALLERGEN_NAME"
+      },
+      {
+        "name": "SYS_C008604",
+        "type": "P",
+        "r_name": null,
+        "column": "ALLERGEN_ID"
+      },
+      {
+        "name": "SYS_C008605",
+        "type": "U",
+        "r_name": null,
+        "column": "ALLERGEN_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "ALLERGEN_ID": "1",
+        "ALLERGEN_NAME": "Milk"
+      },
+      {
+        "ALLERGEN_ID": "2",
+        "ALLERGEN_NAME": "Soy"
+      },
+      {
+        "ALLERGEN_ID": "3",
+        "ALLERGEN_NAME": "Wheat/Gluten"
+      }
+    ]
+  },
+  "BRANDS": {
+    "row_count": 262,
+    "columns": [
+      {
+        "name": "BRAND_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "BRAND_NAME",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008588",
+        "type": "C",
+        "r_name": null,
+        "column": "BRAND_ID"
+      },
+      {
+        "name": "SYS_C008589",
+        "type": "C",
+        "r_name": null,
+        "column": "BRAND_NAME"
+      },
+      {
+        "name": "SYS_C008590",
+        "type": "P",
+        "r_name": null,
+        "column": "BRAND_ID"
+      },
+      {
+        "name": "SYS_C008591",
+        "type": "U",
+        "r_name": null,
+        "column": "BRAND_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "BRAND_ID": "1",
+        "BRAND_NAME": "4700BC"
+      },
+      {
+        "BRAND_ID": "2",
+        "BRAND_NAME": "7 UP"
+      },
+      {
+        "BRAND_ID": "3",
+        "BRAND_NAME": "7 UP NIMBOOZ"
+      }
+    ]
+  },
+  "CATEGORIES": {
+    "row_count": 220,
+    "columns": [
+      {
+        "name": "CATEGORY_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "CATEGORY_NAME",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "PARENT_CATEGORY_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_CATEGORY_PARENT",
+        "type": "R",
+        "r_name": "SYS_C008594",
+        "column": "PARENT_CATEGORY_ID"
+      },
+      {
+        "name": "SYS_C008592",
+        "type": "C",
+        "r_name": null,
+        "column": "CATEGORY_ID"
+      },
+      {
+        "name": "SYS_C008593",
+        "type": "C",
+        "r_name": null,
+        "column": "CATEGORY_NAME"
+      },
+      {
+        "name": "SYS_C008594",
+        "type": "P",
+        "r_name": null,
+        "column": "CATEGORY_ID"
+      },
+      {
+        "name": "UQ_CATEGORY_NAME_PARENT",
+        "type": "U",
+        "r_name": null,
+        "column": "CATEGORY_NAME"
+      },
+      {
+        "name": "UQ_CATEGORY_NAME_PARENT",
+        "type": "U",
+        "r_name": null,
+        "column": "PARENT_CATEGORY_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "CATEGORY_ID": "1",
+        "CATEGORY_NAME": "BISCUIT",
+        "PARENT_CATEGORY_ID": null
+      },
+      {
+        "CATEGORY_ID": "2",
+        "CATEGORY_NAME": "CAKE",
+        "PARENT_CATEGORY_ID": null
+      },
+      {
+        "CATEGORY_ID": "3",
+        "CATEGORY_NAME": "CHOCOLATE",
+        "PARENT_CATEGORY_ID": null
+      }
+    ]
+  },
+  "DIETARY_TYPES": {
+    "row_count": 4,
+    "columns": [
+      {
+        "name": "DIETARY_TYPE_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TYPE_NAME",
+        "type": "VARCHAR2",
+        "length": 50,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008606",
+        "type": "C",
+        "r_name": null,
+        "column": "DIETARY_TYPE_ID"
+      },
+      {
+        "name": "SYS_C008607",
+        "type": "C",
+        "r_name": null,
+        "column": "TYPE_NAME"
+      },
+      {
+        "name": "SYS_C008608",
+        "type": "P",
+        "r_name": null,
+        "column": "DIETARY_TYPE_ID"
+      },
+      {
+        "name": "SYS_C008609",
+        "type": "U",
+        "r_name": null,
+        "column": "TYPE_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "DIETARY_TYPE_ID": "1",
+        "TYPE_NAME": "Vegetarian"
+      },
+      {
+        "DIETARY_TYPE_ID": "2",
+        "TYPE_NAME": "Eggetarian"
+      },
+      {
+        "DIETARY_TYPE_ID": "3",
+        "TYPE_NAME": "Vegan-Friendly"
+      }
+    ]
+  },
+  "INGREDIENTS": {
+    "row_count": 40,
+    "columns": [
+      {
+        "name": "INGREDIENT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "INGREDIENT_NAME",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008632",
+        "type": "C",
+        "r_name": null,
+        "column": "INGREDIENT_ID"
+      },
+      {
+        "name": "SYS_C008633",
+        "type": "C",
+        "r_name": null,
+        "column": "INGREDIENT_NAME"
+      },
+      {
+        "name": "SYS_C008634",
+        "type": "P",
+        "r_name": null,
+        "column": "INGREDIENT_ID"
+      },
+      {
+        "name": "SYS_C008635",
+        "type": "U",
+        "r_name": null,
+        "column": "INGREDIENT_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "INGREDIENT_ID": "1",
+        "INGREDIENT_NAME": "Sugar"
+      },
+      {
+        "INGREDIENT_ID": "2",
+        "INGREDIENT_NAME": "Refined Wheat Flour"
+      },
+      {
+        "INGREDIENT_ID": "3",
+        "INGREDIENT_NAME": "Maida"
+      }
+    ]
+  },
+  "NUTRIENTS": {
+    "row_count": 12,
+    "columns": [
+      {
+        "name": "NUTRIENT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "NUTRIENT_NAME",
+        "type": "VARCHAR2",
+        "length": 50,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "UNIT",
+        "type": "VARCHAR2",
+        "length": 10,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008597",
+        "type": "C",
+        "r_name": null,
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "SYS_C008598",
+        "type": "C",
+        "r_name": null,
+        "column": "NUTRIENT_NAME"
+      },
+      {
+        "name": "SYS_C008599",
+        "type": "C",
+        "r_name": null,
+        "column": "UNIT"
+      },
+      {
+        "name": "SYS_C008600",
+        "type": "P",
+        "r_name": null,
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "SYS_C008601",
+        "type": "U",
+        "r_name": null,
+        "column": "NUTRIENT_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "NUTRIENT_ID": "1",
+        "NUTRIENT_NAME": "Calories",
+        "UNIT": "kcal"
+      },
+      {
+        "NUTRIENT_ID": "2",
+        "NUTRIENT_NAME": "Carbohydrates",
+        "UNIT": "g"
+      },
+      {
+        "NUTRIENT_ID": "3",
+        "NUTRIENT_NAME": "Protein",
+        "UNIT": "g"
+      }
+    ]
+  },
+  "PRODUCTS": {
+    "row_count": 852,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "ITEM_NAME",
+        "type": "VARCHAR2",
+        "length": 200,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "BRAND_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "CATEGORY_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "SERVING_SIZE_G",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 8,
+        "scale": 2,
+        "nullable": true
+      },
+      {
+        "name": "PRICE_INR",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 8,
+        "scale": 2,
+        "nullable": true
+      },
+      {
+        "name": "INGREDIENTS_TEXT",
+        "type": "VARCHAR2",
+        "length": 4000,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "VITAMIN_INFO",
+        "type": "VARCHAR2",
+        "length": 500,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "SOURCE_OF_DATA",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "COLLECTION_DATE",
+        "type": "DATE",
+        "length": 7,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "COLLECTED_BY",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "REMARKS",
+        "type": "VARCHAR2",
+        "length": 300,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PRODUCT_BRAND",
+        "type": "R",
+        "r_name": "SYS_C008590",
+        "column": "BRAND_ID"
+      },
+      {
+        "name": "FK_PRODUCT_CATEGORY",
+        "type": "R",
+        "r_name": "SYS_C008594",
+        "column": "CATEGORY_ID"
+      },
+      {
+        "name": "SYS_C008620",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008621",
+        "type": "C",
+        "r_name": null,
+        "column": "ITEM_NAME"
+      },
+      {
+        "name": "SYS_C008622",
+        "type": "C",
+        "r_name": null,
+        "column": "BRAND_ID"
+      },
+      {
+        "name": "SYS_C008623",
+        "type": "C",
+        "r_name": null,
+        "column": "CATEGORY_ID"
+      },
+      {
+        "name": "SYS_C008624",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "31",
+        "ITEM_NAME": "UNIBIC Cashew Badam Cookies",
+        "BRAND_ID": "247",
+        "CATEGORY_ID": "20",
+        "SERVING_SIZE_G": "100.0",
+        "PRICE_INR": "135.0",
+        "INGREDIENTS_TEXT": "Artificial Flavouring Substances Saffron,Artificial Flavouring Substances Cashew, Artificial Flavouring Substances Almond ,Artificial Flavouring Substances Milk, Dry Nuts (1%) (Almond and Cashew), Edible Vegetable Oil (Palm), Emulsifiers INS 322 from Soy,Emulsifiers INS 472e, Golden Syrup, Iodised Salt, Leavening Agents INS 503(ii), Leavening Agents INS 500(ii), Milk Solids, Refined Wheat Flour (Maida), Sugar",
+        "VITAMIN_INFO": "0",
+        "SOURCE_OF_DATA": null,
+        "COLLECTION_DATE": null,
+        "COLLECTED_BY": null,
+        "REMARKS": null
+      },
+      {
+        "PRODUCT_ID": "32",
+        "ITEM_NAME": "Britannia Nutrichoice Oats Orange & Almond Biscuits",
+        "BRAND_ID": "37",
+        "CATEGORY_ID": "14",
+        "SERVING_SIZE_G": "100.0",
+        "PRICE_INR": "25.0",
+        "INGREDIENTS_TEXT": "Almonds (3%), Butter, Colour (150D), Emulsifiers 322(i),Emulsifiers 471, Emulsifiers 472e, Iodised Salt, Invert Sugar Syrup, Liquid Glucose, Maltodextrin, Milk Solids, Natural and Nature Identical Flavouring Substances, Oats Fibre (0.8%), Orange Peel (0.5%), Orange Powder (0.1%), Raisins, Raising Agents 500(Ii),Raising Agents 503(Ii) ,Raising Agents 450(I), Refined Palm Oil, Rolled Oats (14%), Sugar, Wheat Bran (2.3%), Wheat Flour (Atta) (41.5%)",
+        "VITAMIN_INFO": "0",
+        "SOURCE_OF_DATA": null,
+        "COLLECTION_DATE": null,
+        "COLLECTED_BY": null,
+        "REMARKS": null
+      },
+      {
+        "PRODUCT_ID": "33",
+        "ITEM_NAME": "Dukes Nice Biscuits",
+        "BRAND_ID": "77",
+        "CATEGORY_ID": "14",
+        "SERVING_SIZE_G": "100.0",
+        "PRICE_INR": "35.0",
+        "INGREDIENTS_TEXT": "Refined Wheat Flour (Maida), Sugar, Refined Palm Oil, Sprinkled Sugar (4.7%), Desiccated Coconut (3.8%), Invert Syrup, Milk Solids, Raising Agent 503(ii),Raising Agent 500(ii), Iodized Salt, Emulsifiers 471, Emulsifiers 322",
+        "VITAMIN_INFO": "0",
+        "SOURCE_OF_DATA": null,
+        "COLLECTION_DATE": null,
+        "COLLECTED_BY": null,
+        "REMARKS": null
+      }
+    ]
+  },
+  "PRODUCT_ALLERGENS": {
+    "row_count": 1102,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "ALLERGEN_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PA_ALLERGEN",
+        "type": "R",
+        "r_name": "SYS_C008604",
+        "column": "ALLERGEN_ID"
+      },
+      {
+        "name": "FK_PA_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_ALLERGENS",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_ALLERGENS",
+        "type": "P",
+        "r_name": null,
+        "column": "ALLERGEN_ID"
+      },
+      {
+        "name": "SYS_C008641",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008642",
+        "type": "C",
+        "r_name": null,
+        "column": "ALLERGEN_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "1",
+        "ALLERGEN_ID": "1"
+      },
+      {
+        "PRODUCT_ID": "1",
+        "ALLERGEN_ID": "2"
+      },
+      {
+        "PRODUCT_ID": "1",
+        "ALLERGEN_ID": "3"
+      }
+    ]
+  },
+  "PRODUCT_ALTERNATIVES": {
+    "row_count": 0,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "ALTERNATIVE_PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "ALTERNATIVE_SCORE",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 5,
+        "scale": 2,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "CHK_PALT_NOT_SELF",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "CHK_PALT_NOT_SELF",
+        "type": "C",
+        "r_name": null,
+        "column": "ALTERNATIVE_PRODUCT_ID"
+      },
+      {
+        "name": "FK_PALT_ALT_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "ALTERNATIVE_PRODUCT_ID"
+      },
+      {
+        "name": "FK_PALT_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_ALTERNATIVES",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_ALTERNATIVES",
+        "type": "P",
+        "r_name": null,
+        "column": "ALTERNATIVE_PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008683",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008684",
+        "type": "C",
+        "r_name": null,
+        "column": "ALTERNATIVE_PRODUCT_ID"
+      }
+    ],
+    "sample_rows": []
+  },
+  "PRODUCT_DIETARY_TYPES": {
+    "row_count": 1798,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "DIETARY_TYPE_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PDT_DIETARY_TYPE",
+        "type": "R",
+        "r_name": "SYS_C008608",
+        "column": "DIETARY_TYPE_ID"
+      },
+      {
+        "name": "FK_PDT_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_DIETARY_TYPES",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_DIETARY_TYPES",
+        "type": "P",
+        "r_name": null,
+        "column": "DIETARY_TYPE_ID"
+      },
+      {
+        "name": "SYS_C008646",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008647",
+        "type": "C",
+        "r_name": null,
+        "column": "DIETARY_TYPE_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "1",
+        "DIETARY_TYPE_ID": "1"
+      },
+      {
+        "PRODUCT_ID": "2",
+        "DIETARY_TYPE_ID": "1"
+      },
+      {
+        "PRODUCT_ID": "3",
+        "DIETARY_TYPE_ID": "1"
+      }
+    ]
+  },
+  "PRODUCT_INGREDIENTS": {
+    "row_count": 5250,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "INGREDIENT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PI_INGREDIENT",
+        "type": "R",
+        "r_name": "SYS_C008634",
+        "column": "INGREDIENT_ID"
+      },
+      {
+        "name": "FK_PI_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_INGREDIENTS",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_INGREDIENTS",
+        "type": "P",
+        "r_name": null,
+        "column": "INGREDIENT_ID"
+      },
+      {
+        "name": "SYS_C008636",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008637",
+        "type": "C",
+        "r_name": null,
+        "column": "INGREDIENT_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "1",
+        "INGREDIENT_ID": "1"
+      },
+      {
+        "PRODUCT_ID": "1",
+        "INGREDIENT_ID": "2"
+      },
+      {
+        "PRODUCT_ID": "1",
+        "INGREDIENT_ID": "3"
+      }
+    ]
+  },
+  "PRODUCT_NUTRITION": {
+    "row_count": 10118,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "NUTRIENT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "AMOUNT",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 10,
+        "scale": 2,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PN_NUTRIENT",
+        "type": "R",
+        "r_name": "SYS_C008600",
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "FK_PN_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_NUTRITION",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_NUTRITION",
+        "type": "P",
+        "r_name": null,
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "SYS_C008627",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008628",
+        "type": "C",
+        "r_name": null,
+        "column": "NUTRIENT_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "87",
+        "NUTRIENT_ID": "8",
+        "AMOUNT": "0.0"
+      },
+      {
+        "PRODUCT_ID": "87",
+        "NUTRIENT_ID": "9",
+        "AMOUNT": "0.0"
+      },
+      {
+        "PRODUCT_ID": "87",
+        "NUTRIENT_ID": "10",
+        "AMOUNT": "0.0"
+      }
+    ]
+  },
+  "PRODUCT_TAGS": {
+    "row_count": 2344,
+    "columns": [
+      {
+        "name": "PRODUCT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TAG_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "GENERATED_DATE",
+        "type": "DATE",
+        "length": 7,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "SOURCE",
+        "type": "VARCHAR2",
+        "length": 20,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_PT_PRODUCT",
+        "type": "R",
+        "r_name": "SYS_C008624",
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "FK_PT_TAG",
+        "type": "R",
+        "r_name": "SYS_C008614",
+        "column": "TAG_ID"
+      },
+      {
+        "name": "PK_PRODUCT_TAGS",
+        "type": "P",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "PK_PRODUCT_TAGS",
+        "type": "P",
+        "r_name": null,
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008651",
+        "type": "C",
+        "r_name": null,
+        "column": "PRODUCT_ID"
+      },
+      {
+        "name": "SYS_C008652",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "PRODUCT_ID": "269",
+        "TAG_ID": "3",
+        "GENERATED_DATE": "2026-10-17 15:25:25",
+        "SOURCE": "RULE_ENGINE"
+      },
+      {
+        "PRODUCT_ID": "270",
+        "TAG_ID": "3",
+        "GENERATED_DATE": "2026-10-17 15:25:25",
+        "SOURCE": "RULE_ENGINE"
+      },
+      {
+        "PRODUCT_ID": "271",
+        "TAG_ID": "3",
+        "GENERATED_DATE": "2026-10-17 15:25:25",
+        "SOURCE": "RULE_ENGINE"
+      }
+    ]
+  },
+  "RESTRICTIONS": {
+    "row_count": 5,
+    "columns": [
+      {
+        "name": "RESTRICTION_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "RESTRICTION_NAME",
+        "type": "VARCHAR2",
+        "length": 50,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "DESCRIPTION",
+        "type": "VARCHAR2",
+        "length": 300,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008616",
+        "type": "C",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "SYS_C008617",
+        "type": "C",
+        "r_name": null,
+        "column": "RESTRICTION_NAME"
+      },
+      {
+        "name": "SYS_C008618",
+        "type": "P",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "SYS_C008619",
+        "type": "U",
+        "r_name": null,
+        "column": "RESTRICTION_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "RESTRICTION_ID": "1",
+        "RESTRICTION_NAME": "Diabetes",
+        "DESCRIPTION": "Blood-sugar-conscious profile; flags high-sugar products."
+      },
+      {
+        "RESTRICTION_ID": "2",
+        "RESTRICTION_NAME": "High Cholesterol",
+        "DESCRIPTION": "Flags high saturated fat / trans fat products."
+      },
+      {
+        "RESTRICTION_ID": "3",
+        "RESTRICTION_NAME": "Low Sodium Diet",
+        "DESCRIPTION": "Flags high-sodium products."
+      }
+    ]
+  },
+  "RESTRICTION_RULES": {
+    "row_count": 12,
+    "columns": [
+      {
+        "name": "RESTRICTION_RULE_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "RESTRICTION_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TAG_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "IMPACT",
+        "type": "VARCHAR2",
+        "length": 10,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "CHK_RR_IMPACT",
+        "type": "C",
+        "r_name": null,
+        "column": "IMPACT"
+      },
+      {
+        "name": "FK_RR_RESTRICTION",
+        "type": "R",
+        "r_name": "SYS_C008618",
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "FK_RR_TAG",
+        "type": "R",
+        "r_name": "SYS_C008614",
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008665",
+        "type": "C",
+        "r_name": null,
+        "column": "RESTRICTION_RULE_ID"
+      },
+      {
+        "name": "SYS_C008666",
+        "type": "C",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "SYS_C008667",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008668",
+        "type": "C",
+        "r_name": null,
+        "column": "IMPACT"
+      },
+      {
+        "name": "SYS_C008670",
+        "type": "P",
+        "r_name": null,
+        "column": "RESTRICTION_RULE_ID"
+      },
+      {
+        "name": "UQ_RESTRICTION_TAG",
+        "type": "U",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "UQ_RESTRICTION_TAG",
+        "type": "U",
+        "r_name": null,
+        "column": "TAG_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "RESTRICTION_RULE_ID": "1",
+        "RESTRICTION_ID": "1",
+        "TAG_ID": "1",
+        "IMPACT": "NEGATIVE"
+      },
+      {
+        "RESTRICTION_RULE_ID": "2",
+        "RESTRICTION_ID": "1",
+        "TAG_ID": "2",
+        "IMPACT": "POSITIVE"
+      },
+      {
+        "RESTRICTION_RULE_ID": "3",
+        "RESTRICTION_ID": "1",
+        "TAG_ID": "7",
+        "IMPACT": "POSITIVE"
+      }
+    ]
+  },
+  "TAGS": {
+    "row_count": 12,
+    "columns": [
+      {
+        "name": "TAG_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TAG_NAME",
+        "type": "VARCHAR2",
+        "length": 50,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TAG_TYPE",
+        "type": "VARCHAR2",
+        "length": 10,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "CHK_TAG_TYPE",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_TYPE"
+      },
+      {
+        "name": "SYS_C008610",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008611",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_NAME"
+      },
+      {
+        "name": "SYS_C008612",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_TYPE"
+      },
+      {
+        "name": "SYS_C008614",
+        "type": "P",
+        "r_name": null,
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008615",
+        "type": "U",
+        "r_name": null,
+        "column": "TAG_NAME"
+      }
+    ],
+    "sample_rows": [
+      {
+        "TAG_ID": "1",
+        "TAG_NAME": "High Sugar",
+        "TAG_TYPE": "CONCERN"
+      },
+      {
+        "TAG_ID": "2",
+        "TAG_NAME": "Low Sugar",
+        "TAG_TYPE": "POSITIVE"
+      },
+      {
+        "TAG_ID": "3",
+        "TAG_NAME": "High Sodium",
+        "TAG_TYPE": "CONCERN"
+      }
+    ]
+  },
+  "TAG_RULES": {
+    "row_count": 11,
+    "columns": [
+      {
+        "name": "TAG_RULE_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "TAG_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "NUTRIENT_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "OPERATOR",
+        "type": "VARCHAR2",
+        "length": 2,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "THRESHOLD",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 10,
+        "scale": 2,
+        "nullable": false
+      },
+      {
+        "name": "PRIORITY",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": 2,
+        "scale": 0,
+        "nullable": true
+      },
+      {
+        "name": "DESCRIPTION",
+        "type": "VARCHAR2",
+        "length": 300,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "CHK_TR_OPERATOR",
+        "type": "C",
+        "r_name": null,
+        "column": "OPERATOR"
+      },
+      {
+        "name": "FK_TR_NUTRIENT",
+        "type": "R",
+        "r_name": "SYS_C008600",
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "FK_TR_TAG",
+        "type": "R",
+        "r_name": "SYS_C008614",
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008656",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_RULE_ID"
+      },
+      {
+        "name": "SYS_C008657",
+        "type": "C",
+        "r_name": null,
+        "column": "TAG_ID"
+      },
+      {
+        "name": "SYS_C008658",
+        "type": "C",
+        "r_name": null,
+        "column": "NUTRIENT_ID"
+      },
+      {
+        "name": "SYS_C008659",
+        "type": "C",
+        "r_name": null,
+        "column": "OPERATOR"
+      },
+      {
+        "name": "SYS_C008660",
+        "type": "C",
+        "r_name": null,
+        "column": "THRESHOLD"
+      },
+      {
+        "name": "SYS_C008662",
+        "type": "P",
+        "r_name": null,
+        "column": "TAG_RULE_ID"
+      }
+    ],
+    "sample_rows": [
+      {
+        "TAG_RULE_ID": "1",
+        "TAG_ID": "1",
+        "NUTRIENT_ID": "7",
+        "OPERATOR": ">",
+        "THRESHOLD": "33.5",
+        "PRIORITY": "1",
+        "DESCRIPTION": "Sugar above dataset 75th percentile"
+      },
+      {
+        "TAG_RULE_ID": "2",
+        "TAG_ID": "2",
+        "NUTRIENT_ID": "7",
+        "OPERATOR": "<=",
+        "THRESHOLD": "3.5",
+        "PRIORITY": "1",
+        "DESCRIPTION": "Sugar at/below dataset 25th percentile"
+      },
+      {
+        "TAG_RULE_ID": "3",
+        "TAG_ID": "3",
+        "NUTRIENT_ID": "8",
+        "OPERATOR": ">",
+        "THRESHOLD": "385.0",
+        "PRIORITY": "1",
+        "DESCRIPTION": "Sodium above dataset 75th percentile"
+      }
+    ]
+  },
+  "USERS": {
+    "row_count": 0,
+    "columns": [
+      {
+        "name": "USER_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "USER_NAME",
+        "type": "VARCHAR2",
+        "length": 100,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "EMAIL",
+        "type": "VARCHAR2",
+        "length": 150,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      },
+      {
+        "name": "CREATED_ON",
+        "type": "DATE",
+        "length": 7,
+        "precision": null,
+        "scale": null,
+        "nullable": true
+      }
+    ],
+    "constraints": [
+      {
+        "name": "SYS_C008674",
+        "type": "C",
+        "r_name": null,
+        "column": "USER_ID"
+      },
+      {
+        "name": "SYS_C008675",
+        "type": "C",
+        "r_name": null,
+        "column": "USER_NAME"
+      },
+      {
+        "name": "SYS_C008676",
+        "type": "P",
+        "r_name": null,
+        "column": "USER_ID"
+      },
+      {
+        "name": "SYS_C008677",
+        "type": "U",
+        "r_name": null,
+        "column": "EMAIL"
+      }
+    ],
+    "sample_rows": []
+  },
+  "USER_RESTRICTIONS": {
+    "row_count": 0,
+    "columns": [
+      {
+        "name": "USER_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      },
+      {
+        "name": "RESTRICTION_ID",
+        "type": "NUMBER",
+        "length": 22,
+        "precision": null,
+        "scale": null,
+        "nullable": false
+      }
+    ],
+    "constraints": [
+      {
+        "name": "FK_UR_RESTRICTION",
+        "type": "R",
+        "r_name": "SYS_C008618",
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "FK_UR_USER",
+        "type": "R",
+        "r_name": "SYS_C008676",
+        "column": "USER_ID"
+      },
+      {
+        "name": "PK_USER_RESTRICTIONS",
+        "type": "P",
+        "r_name": null,
+        "column": "USER_ID"
+      },
+      {
+        "name": "PK_USER_RESTRICTIONS",
+        "type": "P",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      },
+      {
+        "name": "SYS_C008678",
+        "type": "C",
+        "r_name": null,
+        "column": "USER_ID"
+      },
+      {
+        "name": "SYS_C008679",
+        "type": "C",
+        "r_name": null,
+        "column": "RESTRICTION_ID"
+      }
+    ],
+    "sample_rows": []
+  }
+}
