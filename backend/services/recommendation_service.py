@@ -69,6 +69,7 @@ class RecommendationService:
                     LEFT JOIN PRODUCT_NUTRITION tf  ON p.PRODUCT_ID = tf.PRODUCT_ID AND tf.NUTRIENT_ID = 6
                     WHERE p.PRODUCT_ID != :target_id
                       AND (p.CATEGORY_ID = :cat_id OR (:parent_id IS NOT NULL AND (c.CATEGORY_ID = :parent_id OR c.PARENT_CATEGORY_ID = :parent_id)))
+                    FETCH FIRST 200 ROWS ONLY
                 """, {
                     "target_id": product_id,
                     "cat_id": cat_id,

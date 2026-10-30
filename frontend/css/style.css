@@ -308,10 +308,167 @@ main {
   outline-offset: 2px !important;
 }
 
-/* Responsive adjust */
+/* ─── Toast Notifications ──────────────────────────────────────────────── */
+#sr-toast-container .toast {
+  min-width: 280px;
+  max-width: 380px;
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* ─── Compare Bar (sticky bottom) ────────────────────────────────────────── */
+.compare-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1b5e20;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 1050;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.compare-bar .btn-compare-go {
+  background: #fff;
+  color: #1b5e20;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 0.4rem 1.2rem;
+  border: none;
+  white-space: nowrap;
+}
+
+.compare-bar .btn-compare-go:hover {
+  background: #d1e7dd;
+}
+
+.compare-bar .btn-compare-clear {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+.compare-checkbox-label {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ─── Nutrition Bar (nut-bar) ─────────────────────────────────────────────── */
+.nut-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.nut-bar-label {
+  width: 120px;
+  font-size: 0.8rem;
+  color: #495057;
+  flex-shrink: 0;
+}
+
+.nut-bar-track {
+  flex: 1;
+  height: 10px;
+  background: #e9ecef;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.nut-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.nut-bar-fill.low   { background: #198754; }
+.nut-bar-fill.mid   { background: #ffc107; }
+.nut-bar-fill.high  { background: #dc3545; }
+
+.nut-bar-value {
+  width: 80px;
+  font-size: 0.8rem;
+  text-align: right;
+  font-weight: 600;
+  color: #212529;
+  flex-shrink: 0;
+}
+
+/* ─── Nutrition Compare Table ─────────────────────────────────────────────── */
+.compare-table th.current-col { background: #d1e7dd; }
+.compare-table td.better      { background: #e9f7ef; color: #155724; font-weight: 600; }
+.compare-table td.worse       { background: #fdf3f3; color: #721c24; }
+
+/* ─── Active Filter Pills ─────────────────────────────────────────────────── */
+#active-filters-container .badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.7rem;
+  border-radius: 20px;
+}
+
+#active-filters-container .btn-close-sm {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+}
+#active-filters-container .btn-close-sm:hover { opacity: 1; }
+
+/* ─── Recently Viewed ─────────────────────────────────────────────────────── */
+.recently-viewed-card {
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.recently-viewed-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 10px rgba(25, 135, 84, 0.12);
+  color: inherit;
+}
+
+/* ─── Stats Section ─────────────────────────────────────────────────────── */
+.stat-pill {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.stat-pill .stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.stat-pill .stat-label {
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* ─── Responsive adjust ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
   }
+  .nut-bar-label { width: 90px; }
+  .nut-bar-value { width: 60px; font-size: 0.75rem; }
 }
-

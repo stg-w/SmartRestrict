@@ -10,6 +10,7 @@ const Catalogue = {
     this.loadMetadata();
     this.bindEvents();
     this.fetchProducts();
+    App._updateCompareBar();
   },
 
   parseUrlParams() {
@@ -70,6 +71,13 @@ const Catalogue = {
         opt.textContent = `${t.tag_name} (${t.tag_type})`;
         tagSelect.appendChild(opt);
       });
+
+      // If category was pending, trigger fetch after options are loaded
+      if (this.pendingCategoryId) {
+        this.fetchProducts();
+        this.pendingCategoryId = null;
+      }
+
     } catch (e) {
       console.warn("Could not load catalogue filter metadata:", e);
     }
@@ -133,6 +141,80 @@ const Catalogue = {
     };
   },
 
+  renderActiveFilters(filters) {
+    const container = document.getElementById("active-filters-container");
+    if (!container) return;
+
+    const pills = [];
+
+    if (filters.q) {
+      pills.push(`
+        <span class="badge bg-success-subtle text-success border border-success-subtle d-inline-flex align-items-center gap-1 px-2 py-1">
+          <i class="bi bi-search"></i> "${App.escapeHtml(filters.q)}"
+          <button class="btn-close btn-close-sm" style="font-size:0.6rem;" aria-label="Remove"
+            onclick="document.getElementById('filter-search').value=''; Catalogue.currentPage=1; Catalogue.fetchProducts();"></button>
+        </span>
+      `);
+    }
+
+    if (filters.category_id && this.metadata) {
+      const cat = this.metadata.categories.find(c => c.category_id == filters.category_id);
+      if (cat) {
+        pills.push(`
+          <span class="badge bg-primary-subtle text-primary border border-primary-subtle d-inline-flex align-items-center gap-1 px-2 py-1">
+            <i class="bi bi-grid"></i> ${App.escapeHtml(cat.category_name)}
+            <button class="btn-close btn-close-sm" style="font-size:0.6rem;" aria-label="Remove"
+              onclick="document.getElementById('filter-category').value=''; Catalogue.currentPage=1; Catalogue.fetchProducts();"></button>
+          </span>
+        `);
+      }
+    }
+
+    if (filters.brand_id && this.metadata) {
+      const brand = this.metadata.brands.find(b => b.brand_id == filters.brand_id);
+      if (brand) {
+        pills.push(`
+          <span class="badge bg-secondary-subtle text-secondary border d-inline-flex align-items-center gap-1 px-2 py-1">
+            <i class="bi bi-building"></i> ${App.escapeHtml(brand.brand_name)}
+            <button class="btn-close btn-close-sm" style="font-size:0.6rem;" aria-label="Remove"
+              onclick="document.getElementById('filter-brand').value=''; Catalogue.currentPage=1; Catalogue.fetchProducts();"></button>
+          </span>
+        `);
+      }
+    }
+
+    if (filters.dietary_type_id && this.metadata) {
+      const dt = this.metadata.dietary_types.find(d => d.dietary_type_id == filters.dietary_type_id);
+      if (dt) {
+        pills.push(`
+          <span class="badge bg-info-subtle text-info border border-info-subtle d-inline-flex align-items-center gap-1 px-2 py-1">
+            <i class="bi bi-leaf"></i> ${App.escapeHtml(dt.type_name)}
+            <button class="btn-close btn-close-sm" style="font-size:0.6rem;" aria-label="Remove"
+              onclick="document.getElementById('filter-dietary').value=''; Catalogue.currentPage=1; Catalogue.fetchProducts();"></button>
+          </span>
+        `);
+      }
+    }
+
+    if (filters.tag_id && this.metadata) {
+      const tag = this.metadata.tags.find(t => t.tag_id == filters.tag_id);
+      if (tag) {
+        const colorClass = tag.tag_type === "CONCERN" ? "badge-concern" : "badge-positive";
+        pills.push(`
+          <span class="badge ${colorClass} d-inline-flex align-items-center gap-1 px-2 py-1">
+            <i class="bi bi-tag"></i> ${App.escapeHtml(tag.tag_name)}
+            <button class="btn-close btn-close-sm" style="font-size:0.6rem;" aria-label="Remove"
+              onclick="document.getElementById('filter-tag').value=''; Catalogue.currentPage=1; Catalogue.fetchProducts();"></button>
+          </span>
+        `);
+      }
+    }
+
+    container.innerHTML = pills.length > 0
+      ? `<div class="d-flex flex-wrap gap-2 mb-3">${pills.join("")}</div>`
+      : "";
+  },
+
   async fetchProducts() {
     const grid = document.getElementById("products-grid");
     const countBox = document.getElementById("results-count");
@@ -144,6 +226,7 @@ const Catalogue = {
     `;
 
     const filters = this.getFilterValues();
+    this.renderActiveFilters(filters);
 
     // Update browser URL query without reloading
     const query = new URLSearchParams();
@@ -160,7 +243,7 @@ const Catalogue = {
       const start = (data.page - 1) * data.page_size + 1;
       const end = Math.min(data.page * data.page_size, data.total);
       countBox.textContent = data.total > 0
-        ? `Showing ${start}-${end} of ${data.total} products`
+        ? `Showing ${start}–${end} of ${data.total} products`
         : "No matching products found";
     } catch (e) {
       grid.innerHTML = `
@@ -191,7 +274,24 @@ const Catalogue = {
       return;
     }
 
-    grid.innerHTML = data.items.map(p => `
+    const compareList = App.getCompareList();
+
+    grid.innerHTML = data.items.map(p => {
+      const isInCompare = compareList.some(c => c.id === p.product_id);
+
+      // Allergen warning pill (show up to 2 allergens on the card)
+      const allergenPill = p.allergens && p.allergens.length > 0
+        ? `<div class="mb-2">
+             ${p.allergens.slice(0, 2).map(a =>
+               `<span class="badge bg-danger-subtle text-danger border border-danger-subtle me-1" title="Contains ${App.escapeHtml(a)}">
+                  <i class="bi bi-exclamation-triangle-fill"></i> ${App.escapeHtml(a)}
+                </span>`
+             ).join("")}
+             ${p.allergens.length > 2 ? `<span class="badge bg-secondary-subtle text-secondary border">+${p.allergens.length - 2} more</span>` : ""}
+           </div>`
+        : "";
+
+      return `
       <div class="col-md-6 col-lg-4">
         <div class="product-card">
           <div class="card-body">
@@ -209,33 +309,42 @@ const Catalogue = {
               </a>
             </h5>
 
-            <div class="mb-3 d-flex flex-wrap">
+            <div class="mb-2 d-flex flex-wrap">
               ${p.tags.slice(0, 3).map(t => App.renderTagBadge(t)).join("")}
             </div>
 
-            <div class="row g-2 mb-3 mt-auto">
+            ${allergenPill}
+
+            <div class="row g-2 mb-3">
               <div class="col-4">
                 <div class="nutrient-chip">
                   <span class="label">Calories</span>
-                  <span>${p.calories !== null ? p.calories + ' kcal' : 'N/A'}</span>
+                  <span>${p.calories !== null ? p.calories + " kcal" : "N/A"}</span>
                 </div>
               </div>
               <div class="col-4">
                 <div class="nutrient-chip">
                   <span class="label">Sugar</span>
-                  <span>${p.sugar !== null ? p.sugar + 'g' : 'N/A'}</span>
+                  <span>${p.sugar !== null ? p.sugar + "g" : "N/A"}</span>
                 </div>
               </div>
               <div class="col-4">
                 <div class="nutrient-chip">
                   <span class="label">Sodium</span>
-                  <span>${p.sodium !== null ? p.sodium + 'mg' : 'N/A'}</span>
+                  <span>${p.sodium !== null ? p.sodium + "mg" : "N/A"}</span>
                 </div>
               </div>
             </div>
 
             <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-              <span class="fw-bold text-success">${p.price_inr ? '₹' + p.price_inr : 'Price N/A'}</span>
+              <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold text-success">${p.price_inr ? "₹" + p.price_inr : "Price N/A"}</span>
+                <label class="compare-checkbox-label small text-muted" title="Add to compare (max 3)">
+                  <input type="checkbox" class="compare-chk me-1" ${isInCompare ? "checked" : ""}
+                    onchange="App.toggleCompare(${p.product_id}, '${App.escapeHtml(p.item_name).replace(/'/g, "\\'")}')">
+                  Compare
+                </label>
+              </div>
               <a href="/product-detail?id=${p.product_id}" class="btn btn-outline-success btn-sm">
                 Details <i class="bi bi-chevron-right"></i>
               </a>
@@ -243,7 +352,8 @@ const Catalogue = {
           </div>
         </div>
       </div>
-    `).join("");
+    `;
+    }).join("");
   },
 
   renderPagination(data) {
@@ -254,13 +364,13 @@ const Catalogue = {
 
     // Previous Button
     const prevLi = document.createElement("li");
-    prevLi.className = `page-item ${data.page <= 1 ? 'disabled' : ''}`;
+    prevLi.className = `page-item ${data.page <= 1 ? "disabled" : ""}`;
     prevLi.innerHTML = `<button class="page-link" aria-label="Previous">&laquo;</button>`;
     prevLi.addEventListener("click", () => {
       if (this.currentPage > 1) {
         this.currentPage--;
         this.fetchProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
     container.appendChild(prevLi);
@@ -280,7 +390,7 @@ const Catalogue = {
       li.addEventListener("click", () => {
         this.currentPage = 1;
         this.fetchProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
       container.appendChild(li);
 
@@ -294,13 +404,13 @@ const Catalogue = {
 
     for (let p = startPage; p <= endPage; p++) {
       const li = document.createElement("li");
-      li.className = `page-item ${p === data.page ? 'active' : ''}`;
+      li.className = `page-item ${p === data.page ? "active" : ""}`;
       li.innerHTML = `<button class="page-link">${p}</button>`;
       const targetPage = p;
       li.addEventListener("click", () => {
         this.currentPage = targetPage;
         this.fetchProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
       container.appendChild(li);
     }
@@ -318,20 +428,20 @@ const Catalogue = {
       li.addEventListener("click", () => {
         this.currentPage = data.total_pages;
         this.fetchProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
       container.appendChild(li);
     }
 
     // Next Button
     const nextLi = document.createElement("li");
-    nextLi.className = `page-item ${data.page >= data.total_pages ? 'disabled' : ''}`;
+    nextLi.className = `page-item ${data.page >= data.total_pages ? "disabled" : ""}`;
     nextLi.innerHTML = `<button class="page-link" aria-label="Next">&raquo;</button>`;
     nextLi.addEventListener("click", () => {
       if (this.currentPage < data.total_pages) {
         this.currentPage++;
         this.fetchProducts();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
     container.appendChild(nextLi);
@@ -339,4 +449,3 @@ const Catalogue = {
 };
 
 document.addEventListener("DOMContentLoaded", () => Catalogue.init());
-

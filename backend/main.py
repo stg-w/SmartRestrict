@@ -1,14 +1,15 @@
 import logging
+import time
 from contextlib import asynccontextmanager
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, RedirectResponse
 
 from backend.config import settings
 from backend.database import init_db_pool, close_db_pool, check_db_health
-from backend.routers import products, metadata, evaluate, alternatives, users
+from backend.routers import products, metadata, evaluate, alternatives, users, stats
 
 logging.basicConfig(
     level=logging.INFO,
@@ -32,7 +33,7 @@ app = FastAPI(
         "Indian packaged-food nutrition, allergen, and dietary-restriction analysis platform. "
         "Powered by Oracle Database Free 26ai."
     ),
-    version="1.0.0",
+    version="2.0.0",
     lifespan=lifespan
 )
 
@@ -45,12 +46,26 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    start = time.perf_counter()
+    response = await call_next(request)
+    elapsed = (time.perf_counter() - start) * 1000
+    if request.url.path.startswith("/api"):
+        logger.info(
+            f"{request.method} {request.url.path} -> {response.status_code} "
+            f"({elapsed:.1f}ms)"
+        )
+    return response
+
 # Include API Routers
 app.include_router(products.router)
 app.include_router(alternatives.router)
 app.include_router(metadata.router)
 app.include_router(evaluate.router)
 app.include_router(users.router)
+app.include_router(stats.router)
 
 @app.get("/api/health", tags=["Health"])
 def health_check():
@@ -81,6 +96,10 @@ if FRONTEND_DIR.exists():
     @app.get("/profile", include_in_schema=False)
     def profile_page():
         return FileResponse(FRONTEND_DIR / "profile.html")
+
+    @app.get("/compare", include_in_schema=False)
+    def compare_page():
+        return FileResponse(FRONTEND_DIR / "nutrition-compare.html")
 
 if __name__ == "__main__":
     import uvicorn

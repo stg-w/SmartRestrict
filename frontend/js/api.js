@@ -1,11 +1,17 @@
 // SmartRestrict API Client
 const API = {
-  baseUrl: window.location.origin.includes(":8000") 
-    ? "" 
+  baseUrl: window.location.origin.includes(":8000")
+    ? ""
     : "http://localhost:8000",
 
   async getHealth() {
     const res = await fetch(`${this.baseUrl}/api/health`);
+    return await res.json();
+  },
+
+  async getStats() {
+    const res = await fetch(`${this.baseUrl}/api/stats`);
+    if (!res.ok) throw new Error("Failed to load statistics");
     return await res.json();
   },
 
@@ -24,6 +30,13 @@ const API = {
     }
     const res = await fetch(`${this.baseUrl}/api/products?${query.toString()}`);
     if (!res.ok) throw new Error("Failed to fetch products");
+    return await res.json();
+  },
+
+  async searchProducts(q, limit = 10) {
+    const query = new URLSearchParams({ q, limit });
+    const res = await fetch(`${this.baseUrl}/api/products/search?${query.toString()}`);
+    if (!res.ok) throw new Error("Search failed");
     return await res.json();
   },
 
@@ -82,4 +95,3 @@ const API = {
     return await res.json();
   }
 };
-

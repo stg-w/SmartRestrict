@@ -17,15 +17,15 @@ class Settings:
     APP_HOST: str = os.getenv("APP_HOST", "127.0.0.1")
     APP_PORT: int = int(os.getenv("APP_PORT", "8000"))
 
-    # Configurable CORS origins
+    # Credentials cannot be used safely with a wildcard origin. Allow a small,
+    # explicit local-development set and permit deployments to override it.
     CORS_ORIGINS: list[str] = [
-        "http://localhost:8000",
-        "http://127.0.0.1:8000",
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "*"
+        origin.strip()
+        for origin in os.getenv(
+            "CORS_ORIGINS",
+            "http://localhost:8000,http://127.0.0.1:8000,http://localhost:5500,http://127.0.0.1:5500,http://localhost:3000,http://127.0.0.1:3000",
+        ).split(",")
+        if origin.strip()
     ]
 
 settings = Settings()

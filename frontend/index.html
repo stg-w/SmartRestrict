@@ -27,6 +27,7 @@
           <li class="nav-item"><a class="nav-link active fw-semibold" href="/">Home</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="/catalogue">Product Catalogue</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="/evaluate">Dietary Checker</a></li>
+          <li class="nav-item"><a class="nav-link fw-semibold" href="/compare">Nutrition Compare</a></li>
           <li class="nav-item"><a class="nav-link fw-semibold" href="/profile">My Health Profile</a></li>
         </ul>
 
@@ -46,7 +47,7 @@
       </span>
       <h1 class="hero-title mb-3">Know What's Inside Indian Packaged Foods</h1>
       <p class="hero-subtitle mx-auto mb-4">
-        SmartRestrict analyzes nutrition facts, ingredients, allergens, and dietary restrictions 
+        SmartRestrict analyzes nutrition facts, ingredients, allergens, and dietary restrictions
         using live Oracle Database classification rules — helping you make healthier choices and find better alternatives.
       </p>
 
@@ -55,7 +56,7 @@
         <div class="col-md-9 col-lg-7">
           <div class="search-card p-2 d-flex align-items-center">
             <i class="bi bi-search text-muted fs-5 ms-3"></i>
-            <input type="text" id="hero-search-input" class="form-control search-input" 
+            <input type="text" id="hero-search-input" class="form-control search-input"
                    placeholder="Search 850+ packaged foods (e.g., Hide & Seek, Dark Fantasy, Oats, Kurkure)..."
                    aria-label="Search packaged foods">
             <button id="hero-search-btn" class="btn btn-success px-4 py-2 rounded-3 fw-semibold">
@@ -66,44 +67,64 @@
       </div>
 
       <!-- Quick Category Shortcuts -->
-      <div class="d-flex flex-wrap justify-content-center gap-2 pt-2">
-        <span class="text-muted small align-self-center me-2">Quick categories:</span>
-        <a href="/catalogue?q=biscuit" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Biscuits & Cookies</a>
-        <a href="/catalogue?q=chips" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Chips & Namkeen</a>
-        <a href="/catalogue?q=noodles" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Instant Noodles</a>
-        <a href="/catalogue?q=oats" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Breakfast Cereals</a>
-        <a href="/catalogue?q=chocolate" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Chocolates</a>
-        <a href="/catalogue?q=beverage" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">Beverages</a>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mb-3">
+        <span class="text-muted small align-self-center me-2">Quick browse:</span>
+        <a href="/catalogue?q=biscuit" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🍪 Biscuits & Cookies</a>
+        <a href="/catalogue?q=chips" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🥔 Chips & Namkeen</a>
+        <a href="/catalogue?q=noodles" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🍜 Instant Noodles</a>
+        <a href="/catalogue?q=oats" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🌾 Breakfast Cereals</a>
+        <a href="/catalogue?q=chocolate" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🍫 Chocolates</a>
+        <a href="/catalogue?q=beverage" class="btn btn-outline-secondary btn-sm rounded-pill bg-white">🧃 Beverages</a>
+      </div>
+
+      <!-- Restriction Quick Filter -->
+      <div class="d-flex flex-wrap justify-content-center gap-2 pt-1" id="restriction-quick-filter">
+        <span class="text-muted small align-self-center me-2">Health filter:</span>
+        <a href="/catalogue" class="btn btn-sm rounded-pill" style="background:#fce4ec;color:#b71c1c;border:1px solid #f48fb1;">
+          <i class="bi bi-droplet-half me-1"></i>Diabetes-Friendly
+        </a>
+        <a href="/catalogue" class="btn btn-sm rounded-pill" style="background:#fff3e0;color:#e65100;border:1px solid #ffcc80;">
+          <i class="bi bi-heart me-1"></i>Low Cholesterol
+        </a>
+        <a href="/catalogue" class="btn btn-sm rounded-pill" style="background:#e3f2fd;color:#0d47a1;border:1px solid #90caf9;">
+          <i class="bi bi-droplet me-1"></i>Low Sodium
+        </a>
+        <a href="/catalogue" class="btn btn-sm rounded-pill" style="background:#f3e5f5;color:#4a148c;border:1px solid #ce93d8;">
+          <i class="bi bi-award me-1"></i>Weight Management
+        </a>
+        <a href="/catalogue" class="btn btn-sm rounded-pill" style="background:#e8f5e9;color:#1b5e20;border:1px solid #a5d6a7;">
+          <i class="bi bi-shield me-1"></i>Gluten-Free
+        </a>
       </div>
     </div>
   </header>
 
-  <!-- Real Database Statistics Bar -->
+  <!-- Live Database Statistics Bar -->
   <section class="bg-white border-bottom py-3">
     <div class="container">
-      <div class="row g-3 text-center align-items-center">
+      <div class="row g-3 text-center" id="stats-bar">
         <div class="col-6 col-md-3">
-          <div class="stat-pill w-100 justify-content-center">
-            <i class="bi bi-box-seam text-success fs-5"></i>
-            <span>852 Products</span>
+          <div class="stat-pill">
+            <div class="stat-number" id="stat-products">—</div>
+            <div class="stat-label"><i class="bi bi-box-seam text-success me-1"></i>Products</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-pill w-100 justify-content-center">
-            <i class="bi bi-tag text-primary fs-5"></i>
-            <span>262 Verified Brands</span>
+          <div class="stat-pill">
+            <div class="stat-number" id="stat-brands">—</div>
+            <div class="stat-label"><i class="bi bi-building text-primary me-1"></i>Verified Brands</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-pill w-100 justify-content-center">
-            <i class="bi bi-shield-exclamation text-danger fs-5"></i>
-            <span>8 Tracked Allergens</span>
+          <div class="stat-pill">
+            <div class="stat-number" id="stat-allergens">—</div>
+            <div class="stat-label"><i class="bi bi-shield-exclamation text-danger me-1"></i>Tracked Allergens</div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <div class="stat-pill w-100 justify-content-center">
-            <i class="bi bi-heart-pulse text-warning fs-5"></i>
-            <span>5 Health Restrictions</span>
+          <div class="stat-pill">
+            <div class="stat-number" id="stat-restrictions">—</div>
+            <div class="stat-label"><i class="bi bi-heart-pulse text-warning me-1"></i>Health Restrictions</div>
           </div>
         </div>
       </div>
@@ -167,20 +188,45 @@
       </div>
     </div>
 
+    <!-- Recently Viewed (from localStorage) -->
+    <div id="recently-viewed-section" style="display:none;" class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h3 class="fw-bold mb-0"><i class="bi bi-clock-history text-success me-2"></i>Recently Viewed</h3>
+          <p class="text-muted small mb-0">Products you looked at in this browser</p>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm" onclick="localStorage.removeItem('sr_recent'); document.getElementById('recently-viewed-section').style.display='none';">
+          Clear history
+        </button>
+      </div>
+      <div id="recently-viewed-grid" class="row g-3"></div>
+    </div>
+
     <!-- Featured Products Spotlight -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <div>
         <h3 class="fw-bold mb-0">Featured Packaged Foods</h3>
-        <p class="text-muted small mb-0">Explore real products analyzed with live database nutrition facts and tags</p>
+        <p class="text-muted small mb-0">Real products analyzed with live database nutrition facts and tags</p>
       </div>
-      <a href="/catalogue" class="btn btn-outline-success fw-semibold">View All 850+ Products <i class="bi bi-arrow-right"></i></a>
+      <a href="/catalogue" class="btn btn-outline-success fw-semibold">View All Products <i class="bi bi-arrow-right"></i></a>
     </div>
 
     <div id="featured-products-grid" class="row g-4">
-      <!-- Dynamically loaded -->
       <div class="col-12 text-center py-5">
         <div class="spinner-border text-success" role="status"></div>
         <p class="text-muted mt-2">Loading products from Oracle...</p>
+      </div>
+    </div>
+
+    <!-- Top Categories from DB -->
+    <div class="mt-5 mb-4">
+      <h3 class="fw-bold mb-1">Explore by Top Categories</h3>
+      <p class="text-muted small mb-3">Showing categories with the most products in the database</p>
+      <div id="top-categories-grid" class="row g-2">
+        <div class="col-12 text-center text-muted py-3">
+          <div class="spinner-border spinner-border-sm text-success me-2" role="status"></div>
+          Loading categories...
+        </div>
       </div>
     </div>
   </main>
@@ -210,21 +256,45 @@
   <script src="/static/js/app.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
-      // Hero search button
-      const searchInput = document.getElementById("hero-search-input");
-      const searchBtn = document.getElementById("hero-search-btn");
-      
-      const doSearch = () => {
-        const val = searchInput.value.trim();
-        window.location.href = `/catalogue?q=${encodeURIComponent(val)}`;
-      };
+      // ── Load live stats ──────────────────────────────────────────────────
+      try {
+        const stats = await API.getStats();
+        document.getElementById("stat-products").textContent = stats.counts.products.toLocaleString();
+        document.getElementById("stat-brands").textContent = stats.counts.brands.toLocaleString();
+        document.getElementById("stat-allergens").textContent = stats.counts.allergens.toLocaleString();
+        document.getElementById("stat-restrictions").textContent = stats.counts.restrictions.toLocaleString();
 
-      searchBtn.addEventListener("click", doSearch);
-      searchInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") doSearch();
-      });
+        // Populate top categories
+        const catGrid = document.getElementById("top-categories-grid");
+        if (stats.top_categories && stats.top_categories.length > 0) {
+          catGrid.innerHTML = stats.top_categories.map(c => `
+            <div class="col-6 col-md-4 col-lg-2">
+              <a href="/catalogue?q=${encodeURIComponent(c.category_name)}"
+                 class="d-block text-center p-3 rounded border bg-white text-decoration-none text-dark h-100"
+                 style="transition: box-shadow 0.2s;"
+                 onmouseover="this.style.boxShadow='0 2px 10px rgba(25,135,84,0.15)'"
+                 onmouseout="this.style.boxShadow=''">
+                <i class="bi bi-grid-3x3-gap text-success fs-4 d-block mb-2"></i>
+                <div class="fw-semibold small">${App.escapeHtml(c.category_name)}</div>
+                <div class="text-muted" style="font-size:0.75rem;">${c.cnt} products</div>
+              </a>
+            </div>
+          `).join("");
+        } else {
+          catGrid.innerHTML = '<div class="col-12 text-muted small">Categories will appear once database is connected.</div>';
+        }
+      } catch (err) {
+        console.warn("Stats unavailable:", err);
+        // Fall back to static placeholders
+        document.getElementById("stat-products").textContent = "852";
+        document.getElementById("stat-brands").textContent = "262";
+        document.getElementById("stat-allergens").textContent = "8";
+        document.getElementById("stat-restrictions").textContent = "5";
+        document.getElementById("top-categories-grid").innerHTML =
+          '<div class="col-12 text-muted small">Browse categories in the <a href="/catalogue">Catalogue</a>.</div>';
+      }
 
-      // Load 6 featured products
+      // ── Load 6 featured products ─────────────────────────────────────────
       try {
         const res = await API.getProducts({ page: 1, page_size: 6 });
         const grid = document.getElementById("featured-products-grid");
@@ -255,29 +325,29 @@
                   ${p.tags.slice(0, 3).map(t => App.renderTagBadge(t)).join("")}
                 </div>
 
-                <div class="row g-2 mb-3 mt-auto">
+                <div class="row g-2 mb-3">
                   <div class="col-4">
                     <div class="nutrient-chip">
                       <span class="label">Calories</span>
-                      <span>${p.calories !== null ? p.calories + ' kcal' : 'N/A'}</span>
+                      <span>${p.calories !== null ? p.calories + " kcal" : "N/A"}</span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="nutrient-chip">
                       <span class="label">Sugar</span>
-                      <span>${p.sugar !== null ? p.sugar + 'g' : 'N/A'}</span>
+                      <span>${p.sugar !== null ? p.sugar + "g" : "N/A"}</span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="nutrient-chip">
                       <span class="label">Sodium</span>
-                      <span>${p.sodium !== null ? p.sodium + 'mg' : 'N/A'}</span>
+                      <span>${p.sodium !== null ? p.sodium + "mg" : "N/A"}</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-                  <span class="fw-bold text-success">${p.price_inr ? '₹' + p.price_inr : 'Label Price'}</span>
+                  <span class="fw-bold text-success">${p.price_inr ? "₹" + p.price_inr : "Label Price"}</span>
                   <a href="/product-detail?id=${p.product_id}" class="btn btn-outline-success btn-sm">
                     Inspect Details <i class="bi bi-chevron-right"></i>
                   </a>
@@ -289,13 +359,30 @@
       } catch (err) {
         document.getElementById("featured-products-grid").innerHTML = `
           <div class="col-12 text-center text-muted py-4">
-            <i class="bi bi-exclamation-circle text-warning fs-3 mb-2"></i>
+            <i class="bi bi-exclamation-circle text-warning fs-3 mb-2 d-block"></i>
             <p>Database loading. Browse products via <a href="/catalogue">Catalogue</a>.</p>
           </div>
         `;
+      }
+
+      // ── Recently Viewed ──────────────────────────────────────────────────
+      const recent = App.getRecentlyViewed();
+      if (recent.length > 0) {
+        const section = document.getElementById("recently-viewed-section");
+        section.style.display = "block";
+        document.getElementById("recently-viewed-grid").innerHTML = recent.map(p => `
+          <div class="col-6 col-md-4 col-lg-2">
+            <a href="/product-detail?id=${p.product_id}" class="recently-viewed-card">
+              <div class="small fw-semibold text-dark mb-1">${App.escapeHtml(p.item_name)}</div>
+              <div class="text-muted" style="font-size:0.75rem;">${App.escapeHtml(p.brand_name || "")}</div>
+              ${p.calories !== null
+                ? `<div class="badge bg-light text-dark border mt-1" style="font-size:0.7rem;">${p.calories} kcal</div>`
+                : ""}
+            </a>
+          </div>
+        `).join("");
       }
     });
   </script>
 </body>
 </html>
-

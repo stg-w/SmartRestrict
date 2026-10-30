@@ -2,8 +2,39 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException, Query, status
 from backend.models import PaginatedProductsResponse, ProductDetail
 from backend.services.product_service import product_service
+from backend.database import get_db_connection, rows_to_dicts
 
 router = APIRouter(prefix="/api/products", tags=["Products"])
+
+
+@router.get("/search", summary="Fast autocomplete search — returns id, name, brand (max 10 results)")
+def search_products(
+    q: str = Query(..., min_length=1, description="Search term"),
+    limit: int = Query(10, ge=1, le=20, description="Maximum results to return")
+):
+    """Lightweight search endpoint for autocomplete dropdowns."""
+    if not q.strip():
+        return []
+    try:
+        clean_q = f"%{q.strip().lower()}%"
+        with get_db_connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    SELECT p.PRODUCT_ID, p.ITEM_NAME, b.BRAND_NAME, c.CATEGORY_NAME
+                    FROM PRODUCTS p
+                    JOIN BRANDS b ON p.BRAND_ID = b.BRAND_ID
+                    JOIN CATEGORIES c ON p.CATEGORY_ID = c.CATEGORY_ID
+                    WHERE LOWER(p.ITEM_NAME) LIKE :q OR LOWER(b.BRAND_NAME) LIKE :q
+                    ORDER BY p.ITEM_NAME
+                    FETCH FIRST :lim ROWS ONLY
+                """, {"q": clean_q, "lim": limit})
+                return rows_to_dicts(cur)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Search failed: {str(e)}"
+        )
+
 
 @router.get("", response_model=PaginatedProductsResponse, summary="Browse & search packaged food products")
 def list_products(
@@ -29,6 +60,7 @@ def list_products(
         )
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Database error: {str(e)}")
+
 
 @router.get("/{product_id}", response_model=ProductDetail, summary="Get full product nutrition, ingredients, and tags")
 def get_product(product_id: int):

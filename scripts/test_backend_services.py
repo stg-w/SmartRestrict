@@ -1,5 +1,12 @@
 import sys
 from pathlib import Path
+
+# This is an opt-in live Oracle smoke test, not a pytest test module.  Keep
+# pytest collection from opening a database connection as an import side effect.
+if "pytest" in sys.modules:
+    import pytest
+    pytest.skip("Live Oracle smoke test; run this script directly", allow_module_level=True)
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from backend.database import check_db_health
